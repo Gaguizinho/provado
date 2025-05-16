@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo Fetch + PHP</title>
+</head>
+<body>
+  <h1>Saudação via Fetch e URL</h1>
+
+  <!-- Input para o usuário digitar o CEP -->
+  <input type="text" id="cep" placeholder="Digite o CEP" />
+
+  <!-- Botão que envia a requisição -->
+  <button id="bt">Buscar</button>
+
+  <script>
+    // Clique no botão "Buscar"
+    document.getElementById('bt').addEventListener('click', function() {
+      // Pega o valor digitado no campo de input
+      const cep = document.getElementById('cep').value;
+
+      // Verifica se o CEP foi digitado
+      if (cep) {
+        // Realiza a requisição fetch passando o CEP na URL
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+          .then(response => response.json())
+          .then(data => {
+            // Exibe os dados do CEP no console
+            console.log(data);
+          })
+          .catch(error => console.error('Erro na requisição:', error));
+      } else {
+        alert('Por favor, digite um CEP!');
+      }
+    });
+  </script>
+</body>
+</html>
